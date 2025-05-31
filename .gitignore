@@ -9,7 +9,8 @@ npm-debug.log*
 
 # Environment variables
 .env
-
+/backend/config/config.env
+*.env.*
 # OS files
 .DS_Store
 Thumbs.db
