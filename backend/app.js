@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const messageRoutes = require("./routes/messageRoutes");
 const userRoutes = require("./routes/userRoutes");
+const groupRoutes = require("./routes/groupRoutes");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
 // Middleware
@@ -19,6 +20,7 @@ app.use(
 // Routes
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/groups", groupRoutes);
 
 app.use(errorMiddleware);
 module.exports = app;

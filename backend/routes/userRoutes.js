@@ -6,6 +6,7 @@ const {
   authStatus,
   addContact,
   getUserContacts,
+  updateUser,
 } = require("../controllers/userController");
 const isAuthenticated = require("../middleware/isAuthenticated");
 const router = express.Router();
@@ -23,6 +24,7 @@ router.route("/authstatus").get(isAuthenticated, authStatus);
 router.route("/addContact").post(isAuthenticated, addContact);
 // Route to get user contacts
 router.route("/contacts").get(isAuthenticated, getUserContacts);
+router.route("/:userid").put(isAuthenticated, updateUser);
 
 // Export the router
 module.exports = router;

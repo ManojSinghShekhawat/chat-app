@@ -84,8 +84,36 @@ const getMessagesByUserId = asyncErrorHandler(async (req, res) => {
   }
 });
 
+//get message belongs to a groupId
+const getMessagesByGroupId = asyncErrorHandler(async (req, res) => {
+  try {
+    const groupId = req.params.groupId;
+    console.log(groupId);
+
+    const messages = await Message.find({
+      group: new mongoose.Types.ObjectId(groupId),
+    }).sort({ timestamp: -1 });
+
+    if (!messages.length) {
+      return res
+        .status(404)
+        .json({ message: "No messages found for this group" });
+    }
+
+    res.status(200).json({
+      message: "Messages retrieved successfully",
+      messages,
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = {
   createMessage,
   getAllMessages,
   getMessagesByUserId,
+  getMessagesByGroupId,
 };

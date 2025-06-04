@@ -20,19 +20,31 @@ io.on("connection", (socket) => {
     socket.join(userId);
   });
 
+  socket.on("joinGroup", (groupId) => {
+    socket.join(groupId);
+  });
+
   //handle sending messages
+
   socket.on("sendMessage", async (message) => {
-    const { senderId, receiverId, content } = message;
+    const { senderId, receiverId, content, groupId } = message;
+
     //save the message to the database
     try {
       const newMessage = await Message.create({
         sender: senderId,
-        receiver: receiverId,
+        receiver: receiverId || null,
+        group: groupId || null,
         content,
         timestamp: new Date(),
       });
-      io.to(receiverId).emit("receiveMessage", newMessage);
-      io.to(senderId).emit("receiveMessage", newMessage);
+
+      if (groupId) {
+        io.to(groupId).emit("receiveMessage", newMessage);
+      } else {
+        io.to(receiverId).emit("receiveMessage", newMessage);
+        io.to(senderId).emit("receiveMessage", newMessage);
+      }
     } catch (error) {
       console.error("Error saving message:", error);
       return;
@@ -43,8 +55,6 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });
-
-  // You can add more event listeners here for real-time features
 });
 
 // Connect to the database

@@ -13,8 +13,29 @@ const createUser = asyncErrorHandler(async (req, res, next) => {
   }
 
   const user = await User.create({ username, email, password, mobile });
+  await Contact.findOneAndUpdate(
+    { mobile },
+    { isRegistered: true },
+    { new: true, upsert: true }
+  );
 
   sendToken(user, 201, res);
+});
+
+//update a user
+const updateUser = asyncErrorHandler(async (req, res, next) => {
+  const { username, email, mobile } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+    username,
+    email,
+    mobile,
+  });
+
+  res.status(201).json({
+    success: true,
+    message: "Profile updated successfully",
+    updatedUser,
+  });
 });
 
 //login a user
@@ -34,7 +55,7 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
   if (!isMatch) {
     next(new ErrorHandler("Wrong email or password", 401));
   }
-  console.log(user);
+
   sendToken(user, 200, res);
 });
 
@@ -55,7 +76,6 @@ const logoutUser = asyncErrorHandler(async (req, res, next) => {
 
 //auth status check
 const authStatus = asyncErrorHandler(async (req, res, next) => {
-  // console.log(req.user);
   if (!req.user) {
     return next(new ErrorHandler("Not authenticated", 401));
   }
@@ -76,13 +96,13 @@ const addContact = asyncErrorHandler(async (req, res, next) => {
     mobile,
     user: req.user.id,
   });
-  console.log(existingContact);
+
   if (existingContact) {
     return next(new ErrorHandler("Contact already exists", 400));
   }
 
   const isRegistered = await User.findOne({ mobile });
-  console.log(isRegistered);
+
   const newContact = await Contact.create({
     user: req.user.id,
     contact: isRegistered ? isRegistered._id : null,
@@ -117,4 +137,5 @@ module.exports = {
   authStatus,
   addContact,
   getUserContacts,
+  updateUser,
 };
