@@ -11,10 +11,10 @@ function App() {
     dispatch(authCheck());
   }, [dispatch]);
   const userId = useSelector((state) => state.user?.user?.id);
-  console.log(userId);
+  // console.log(userId);
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   // console.log(isAuthenticated);
   // if (!isAuthenticated) {
   //   return <div>Please log in to access the chat.</div>;

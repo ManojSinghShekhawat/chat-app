@@ -16,6 +16,7 @@ const ChatBox = ({}) => {
   const receiverId = useSelector(
     (state) => state.contact?.selectedContact?.contact._id
   );
+  const groupId = useSelector((state) => state.group?.selectedGroup?._id);
 
   const [chat, setChat] = useState("");
 
@@ -23,12 +24,13 @@ const ChatBox = ({}) => {
     if (chat.trim() !== "") {
       const message = {
         senderId: userId,
-        receiverId,
+        receiverId: receiverId ? receiverId : null,
+        groupId: groupId ? groupId : null,
         content: chat,
         timestamp: new Date().toISOString(),
       };
       socket.emit("sendMessage", message);
-      console.log("sent a message:", message);
+
       setChat(""); // Clear the input after sending
     }
   };
@@ -39,7 +41,7 @@ const ChatBox = ({}) => {
         position={"fixed"}
         bottom="0"
         right={"0"}
-        width="84%"
+        w={{ base: "100%", sm: "99%", md: "68%", lg: "79%", xl: "84%" }}
         p={4}
         bg="gray.100"
         boxShadow="md"
@@ -57,7 +59,7 @@ const ChatBox = ({}) => {
                 handleSendMessage();
               }
             }}
-            disabled={!receiverId}
+            disabled={!receiverId && !groupId}
           />
           <InputRightElement>
             <HStack spacing={2} mr={"2rem"}>

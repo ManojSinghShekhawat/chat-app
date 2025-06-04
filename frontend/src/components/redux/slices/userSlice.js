@@ -6,7 +6,7 @@ export const authCheck = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/users/authstatus",
+        `${import.meta.env.VITE_API_URL}/users/authstatus`,
         { withCredentials: true }
       );
 
