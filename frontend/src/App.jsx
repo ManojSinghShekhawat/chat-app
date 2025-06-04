@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import MessagesBox from "./components/MessagesBox";
-import ChatBox from "./components/ChatBox";
+import ChatBox from "./components/Chatbox";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { authCheck } from "./components/redux/slices/userSlice";

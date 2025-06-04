@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import socket from "../util/socket";
 import { useSelector } from "react-redux";
 
-const ChatBox = ({}) => {
+const Chatbox = ({}) => {
   const userId = useSelector((state) => state.user?.user?._id);
   const receiverId = useSelector(
     (state) => state.contact?.selectedContact?.contact._id
@@ -78,4 +78,4 @@ const ChatBox = ({}) => {
   );
 };
 
-export default ChatBox;
+export default Chatbox;
