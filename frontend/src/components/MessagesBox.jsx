@@ -20,7 +20,7 @@ const MessagesBox = () => {
       setMessages([]); // Clear previous messages
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/v1//messages/${receiverId}`,
+          `${import.meta.env.VITE_API_URL}/api/v1/messages/${receiverId}`,
           {
             method: "GET",
             headers: {
