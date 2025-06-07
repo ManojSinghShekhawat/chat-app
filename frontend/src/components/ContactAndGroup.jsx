@@ -77,8 +77,8 @@ const ContactAndGroup = ({ handleContactSelect, handleLogout }) => {
             msOverflowStyle: "none",
           }}
         >
-          {contacts.length > 0 ? (
-            contacts.map((contact) => (
+          {contacts?.length > 0 ? (
+            contacts?.map((contact) => (
               <HStack
                 key={contact._id}
                 cursor={"pointer"}

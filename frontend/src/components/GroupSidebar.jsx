@@ -45,7 +45,7 @@ const GroupSidebar = ({ handleGroupSelect }) => {
             msOverflowStyle: "none",
           }}
         >
-          {groups.map((group) => (
+          {groups?.map((group) => (
             <Box
               key={group._id}
               style={{
@@ -58,7 +58,7 @@ const GroupSidebar = ({ handleGroupSelect }) => {
               onClick={() => handleGroupSelect(group)}
             >
               <h3>{group.name}</h3>
-              <p>Members: {group.members.length}</p>
+              <p>Members: {group?.members?.length}</p>
             </Box>
           ))}
         </VStack>
