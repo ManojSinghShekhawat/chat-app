@@ -13,8 +13,6 @@ import {
   Input,
   FormControl,
   FormLabel,
-  InputGroup,
-  InputRightElement,
   Text,
   Avatar,
   AvatarBadge,
@@ -54,7 +52,7 @@ const Login = () => {
   });
   const handleSignup = async () => {
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/users/register`,
+      `${import.meta.env.VITE_API_URL}/api/v1/users/register`,
       signupData,
       {
         withCredentials: true,
@@ -86,7 +84,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/users/login`,
+      `${import.meta.env.VITE_API_URL}/api/v1/users/login`,
       loginData,
       {
         withCredentials: true,
@@ -103,7 +101,7 @@ const Login = () => {
   const handleShowGroupDetails = async (groupId) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/groups/${groupId}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/groups/${groupId}`,
         {
           withCredentials: true,
         }

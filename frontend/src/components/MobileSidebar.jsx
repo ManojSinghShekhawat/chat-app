@@ -70,7 +70,7 @@ const MobileSidebar = ({
     const fetchContacts = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/users/contacts`,
+          `${import.meta.env.VITE_API_URL}/api/v1/users/contacts`,
           {
             withCredentials: true,
           }

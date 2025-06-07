@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   const addContact = async (data) => {
     const newContact = await axios.post(
-      `${import.meta.env.VITE_API_URL}/users/addContact`,
+      `${import.meta.env.VITE_API_URL}api/v1/users/addContact`,
       data,
       {
         withCredentials: true,
@@ -42,7 +42,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${import.meta.env.VITE_API_URL}/v1/users/logout`, {
+      await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/users/logout`, {
         withCredentials: true,
       });
 

@@ -34,7 +34,7 @@ const Profile = ({ onOpenProfile, isOpenProfile, onCloseProfile }) => {
 
   const handleProfileUpdate = async () => {
     const res = await axios.put(
-      `${import.meta.env.VITE_API_URL}/users/${userId}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/users/${userId}`,
       ProfileData,
       {
         withCredentials: true,

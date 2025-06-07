@@ -27,7 +27,7 @@ const NewGroup = ({ contacts, onOpen, isOpen, onClose }) => {
 
   const handleGroupCreation = async (selectedUsers) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/groups/create`,
+      `${import.meta.env.VITE_API_URL}/api/v1/groups/create`,
       {
         method: "POST",
         headers: {

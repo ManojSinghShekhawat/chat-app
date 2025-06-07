@@ -10,13 +10,16 @@ const GroupSidebar = ({ handleGroupSelect }) => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/groups`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include", // Include cookies for authentication
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}api/v1/groups`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies for authentication
+          }
+        );
         const data = await response.json();
 
         setGroups(data.groups);
