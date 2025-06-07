@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   const addContact = async (data) => {
     const newContact = await axios.post(
-      `${import.meta.env.VITE_API_URL}api/v1/users/addContact`,
+      `${import.meta.env.VITE_API_URL}/api/v1/users/addContact`,
       data,
       {
         withCredentials: true,
