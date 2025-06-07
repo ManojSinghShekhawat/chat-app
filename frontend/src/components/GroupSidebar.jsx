@@ -11,7 +11,7 @@ const GroupSidebar = ({ handleGroupSelect }) => {
     const fetchGroups = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}api/v1/groups`,
+          `${import.meta.env.VITE_API_URL}/api/v1/groups`,
           {
             method: "GET",
             headers: {
