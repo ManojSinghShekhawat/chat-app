@@ -17,6 +17,13 @@ const messageSchema = new mongoose.Schema(
       ref: "Group",
       default: null,
     },
+    files: [
+      {
+        url: String,
+        fileType: String,
+        name: String,
+      },
+    ],
     isRead: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
     isStarred: { type: Boolean, default: false },

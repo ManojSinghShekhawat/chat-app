@@ -25,10 +25,15 @@ const createUser = asyncErrorHandler(async (req, res, next) => {
 //update a user
 const updateUser = asyncErrorHandler(async (req, res, next) => {
   const { username, email, mobile } = req.body;
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, {
-    username,
-    email,
-    mobile,
+  const updatedData = { username, email, mobile };
+
+  if (req.file) {
+    updatedData.avatar = req.file.path;
+  }
+
+  console.log(updatedData);
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, updatedData, {
+    new: true,
   });
 
   res.status(201).json({

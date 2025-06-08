@@ -10,6 +10,7 @@ const {
 } = require("../controllers/userController");
 const isAuthenticated = require("../middleware/isAuthenticated");
 const router = express.Router();
+const upload = require("../middleware/multer");
 
 // Route to create a new user
 router.route("/register").post(createUser);
@@ -24,7 +25,9 @@ router.route("/authstatus").get(isAuthenticated, authStatus);
 router.route("/addContact").post(isAuthenticated, addContact);
 // Route to get user contacts
 router.route("/contacts").get(isAuthenticated, getUserContacts);
-router.route("/:userid").put(isAuthenticated, updateUser);
+router
+  .route("/:userid")
+  .put(isAuthenticated, upload.single("avatar"), updateUser);
 
 // Export the router
 module.exports = router;

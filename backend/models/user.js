@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    avatar: {
+      type: String,
+    },
   },
   {
     timestamps: true,

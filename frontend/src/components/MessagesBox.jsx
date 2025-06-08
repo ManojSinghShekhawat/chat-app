@@ -1,8 +1,9 @@
-import { Box, Text, VStack, Tooltip } from "@chakra-ui/react";
+import { Box, Text, VStack, Tooltip, Link, HStack } from "@chakra-ui/react";
 import React, { use } from "react";
 import socket from "../util/socket";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { IoMdAttach } from "react-icons/io";
 
 const MessagesBox = () => {
   const userId = useSelector((state) => state.user?.user?._id);
@@ -82,6 +83,7 @@ const MessagesBox = () => {
 
     // Message handler
     const handleReceiveMessage = (message) => {
+      console.log(message);
       setMessages((prevMessages) => [...prevMessages, message]);
     };
 
@@ -135,6 +137,20 @@ const MessagesBox = () => {
                   maxWidth="70%"
                 >
                   <Text>{msg.content}</Text>
+                  {msg?.files.map((file, idx) => (
+                    <VStack
+                      justifyContent={"center"}
+                      alignItems={"flex-start"}
+                      key={idx}
+                    >
+                      <Link href={file.url}>
+                        <HStack>
+                          <IoMdAttach size={15} color="#4A5568" />{" "}
+                          <Text>{file.name}</Text>
+                        </HStack>
+                      </Link>
+                    </VStack>
+                  ))}
                 </Box>
               </Tooltip>
             );

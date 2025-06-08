@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
   //handle sending messages
 
   socket.on("sendMessage", async (message) => {
-    const { senderId, receiverId, content, groupId } = message;
+    const { senderId, receiverId, content, groupId, files } = message;
 
     //save the message to the database
     try {
@@ -36,6 +36,7 @@ io.on("connection", (socket) => {
         receiver: receiverId || null,
         group: groupId || null,
         content,
+        files,
         timestamp: new Date(),
       });
 
